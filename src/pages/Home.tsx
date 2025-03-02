@@ -3,11 +3,15 @@ import CommentList from '@/components/CommentList';
 import Spinner from '@/components/Spinner';
 import { useSelector } from 'react-redux';
 import useCommentsFetch from '@/hooks/useCommentsFetch';
+import { CommentsState } from "@/types/Comment";
+interface RootState {
+  comments: CommentsState;
+}
 
 const Home = () => {
   useCommentsFetch(); 
 
-  const { comments, loading, error } = useSelector((state: any) => state.comments);
+  const { comments, loading, error } = useSelector((state: RootState) => state.comments);
 
   return (
     <div>

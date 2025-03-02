@@ -5,3 +5,9 @@ export interface Comment {
   email: string;
   body: string;
 }
+
+export interface CommentsState {
+  comments: Comment[];
+  loading: boolean;
+  error: string | null;
+}
