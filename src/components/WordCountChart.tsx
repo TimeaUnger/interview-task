@@ -12,7 +12,7 @@ interface WordCountChartProps {
 const WordCountChart = ({ comments }: WordCountChartProps) => {
 
   const commentWordCounts = useMemo(() =>
-    comments.slice(0, 10).map((comment) => ({
+    comments.slice(0, 5).map((comment) => ({
       id: comment.id,
       wordCount: comment.body.split(" ").length,
     })),
@@ -20,7 +20,7 @@ const WordCountChart = ({ comments }: WordCountChartProps) => {
   );
 
   const data = {
-    labels: commentWordCounts.map((comment) => `Comment ${comment.id}`),
+    labels: commentWordCounts.map((comment) => `Comment #${comment.id}`),
     datasets: [
       {
         label: "Word Count",
@@ -32,7 +32,10 @@ const WordCountChart = ({ comments }: WordCountChartProps) => {
     ],
   };
 
-  return (<Bar data={data} />)
+  return (<div className='word-count-chart'>
+    <Bar data={data} options={{ maintainAspectRatio: false }} />
+  </div>
+  )
 };
 
 export default WordCountChart;

@@ -8,7 +8,7 @@ interface CommentListProps {
 const CommentList = ({ comments }: CommentListProps) => {
   return (
     <div className="comment-list">
-      {comments.slice(0, 10).map((comment) => (
+      {comments.slice(0, 5).map((comment) => (
         <div key={comment.id} className="comment-wrapper">
           <div className='comment-header'>
             <div className='comment-id'>#{comment.id}</div>
