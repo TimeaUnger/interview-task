@@ -7,7 +7,7 @@ interface Comment {
 }
 
 interface CommentsState {
-  commentsByPage: Record<number, Comment[]>; // ✅ Store comments per page
+  commentsByPage: Record<number, Comment[]>;
   loading: boolean;
   error: string | null;
   currentPage: number;
