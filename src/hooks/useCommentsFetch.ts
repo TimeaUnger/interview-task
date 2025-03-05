@@ -9,19 +9,19 @@ const useCommentsFetch = (page: number) => {
   const { commentsByPage, loading } = useSelector((state: RootState) => state.comments);
 
   useEffect(() => {
-
-    if (commentsByPage[page]) return;
-
-    dispatch(setLoading(true));
-
-    const fetchComments = async () => {
+    const fetchComments = async (pageNumber: number) => {
       try {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/comments?_page=${page}&_limit=5`);
-        
-        dispatch(setComments({ page, comments: response.data }));
+        if (commentsByPage[pageNumber]) return;
 
-        const totalComments = parseInt(response.headers['x-total-count'], 10);
-        dispatch(setTotalPages(Math.ceil(totalComments / 5)));
+        dispatch(setLoading(true));
+
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/comments?_page=${pageNumber}&_limit=5`);
+        dispatch(setComments({ page: pageNumber, comments: response.data }));
+
+        if (pageNumber === 1) {
+          const totalComments = parseInt(response.headers['x-total-count'], 10);
+          dispatch(setTotalPages(Math.ceil(totalComments / 5)));
+        }
       } catch (err) {
         dispatch(setError('Sorry, the requested page or resource could not be found.'));
       } finally {
@@ -29,7 +29,8 @@ const useCommentsFetch = (page: number) => {
       }
     };
 
-    fetchComments();
+    Array.from({ length: 3 }, (_, index) => page + index).forEach(fetchComments);
+    
   }, [dispatch, page, commentsByPage]);
 
   return { commentsByPage, loading };

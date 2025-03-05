@@ -21,8 +21,10 @@ const Home: React.FC = () => {
   };
 
   const handleNextPage = () => {
-    if (currentPage < totalPages) dispatch(setPage(currentPage + 1));
-  };
+    if (currentPage < totalPages) {
+      dispatch(setPage(currentPage + 1));
+    }
+  };  
 
   return (
     <div>
