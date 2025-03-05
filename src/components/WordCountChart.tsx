@@ -10,12 +10,12 @@ interface WordCountChartProps {
 }
 
 const WordCountChart = ({ comments }: WordCountChartProps) => {
-
-  const commentWordCounts = useMemo(() =>
-    comments.slice(0, 5).map((comment) => ({
-      id: comment.id,
-      wordCount: comment.body.split(" ").length,
-    })),
+  const commentWordCounts = useMemo(
+    () =>
+      comments.slice(0, 5).map((comment) => ({
+        id: comment.id,
+        wordCount: comment.body.split(" ").length,
+      })),
     [comments]
   );
 
@@ -32,10 +32,11 @@ const WordCountChart = ({ comments }: WordCountChartProps) => {
     ],
   };
 
-  return (<div className='word-count-chart'>
-    <Bar data={data} options={{ maintainAspectRatio: false }} />
-  </div>
-  )
+  return (
+    <div className="w-full h-40">
+      <Bar data={data} options={{ maintainAspectRatio: false }} />
+    </div>
+  );
 };
 
 export default WordCountChart;

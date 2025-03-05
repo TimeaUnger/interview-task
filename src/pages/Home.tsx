@@ -7,6 +7,7 @@ import CommentList from '@/components/CommentList';
 import WordCountChart from '@/components/WordCountChart';
 import Spinner from '@/components/Spinner';
 import HelpSection from '@/components/HelpSection';
+import Pagination from '@/components/Pagination';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,25 +29,29 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
+    <>
       <HelpSection />
-      <div className="page-title">Comments & Word Count Analysis</div>
+      <div className="flex flex-col items-center px-4">
 
-      {(isLoading && !comments.length) ?? <Spinner />}
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+          Comments & Word Count Analysis
+        </h1>
 
-      <WordCountChart comments={comments} />
-      <CommentList comments={comments} />
+        {isLoading && !comments.length && <Spinner />}
 
-      <div className="pagination">
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>
-          Previous
-        </button>
-        <span>Page {currentPage} of {queryTotalPages || totalPages}</span>
-        <button onClick={handleNextPage} disabled={currentPage === (queryTotalPages || totalPages)}>
-          Next
-        </button>
+        <WordCountChart comments={comments} />
+        <CommentList comments={comments} />
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          queryTotalPages={queryTotalPages}
+          handlePrevPage={handlePrevPage}
+          handleNextPage={handleNextPage}
+        />
       </div>
-    </div>
+    </>
+
   );
 };
 
