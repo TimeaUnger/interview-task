@@ -18,7 +18,7 @@ const fetchComments = async (page: number) => {
 const useCommentsFetch = (page: number) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const { commentsByPage, loading } = useSelector((state: RootState) => state.comments);
+  const { commentsByPage, loading, totalPages } = useSelector((state: RootState) => state.comments);
 
   const cachedComments = commentsByPage[page];
 
@@ -70,7 +70,7 @@ const useCommentsFetch = (page: number) => {
   return {
     comments: cachedComments || data?.comments || [],
     loading: isLoading || isFetching || loading,
-    totalPages: data?.totalPages || 1,
+    totalPages: data?.totalPages || totalPages,
   };
 };
 
