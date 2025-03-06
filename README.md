@@ -1,6 +1,7 @@
 # React + TypeScript + Vite + Tailwind
 
-![image](https://github.com/user-attachments/assets/6d1ab77d-fd2f-4ec6-bc2d-4f1b101d5004)
+![image](https://github.com/user-attachments/assets/b51a3bf7-a863-4aba-a396-7659f7b04272)
+
 
 ![image](https://github.com/user-attachments/assets/bda0a80b-c6a0-413b-a3d3-1e31514505c0)
 
